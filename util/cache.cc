@@ -284,7 +284,7 @@ Cache::Handle* LRUCache::Insert(const Slice& key, uint32_t hash, void* value,
   if (capacity_ > 0) {
     e->refs++;  // for the cache's reference.
     e->in_cache = true;
-    LRU_Append(&in_use_, e);
+    LRU_Append(&in_use_, e);  // 内部缓存以及外部引用 in_use_
     usage_ += charge;
     FinishErase(table_.Insert(e));
   } else {  // don't cache. (capacity_==0 is supported and turns off caching.)
